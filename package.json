@@ -2,19 +2,118 @@
   "name": "react-production-boilerplate",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "lint": "eslint src --max-warnings 0",
+    "lint:fix": "eslint src --fix",
+    "start": "cross-env REACT_APP_GIT_SHA=`git rev-parse --short HEAD` react-scripts start",
+    "start:e2e": "cross-env REACT_APP_GIT_SHA=`git rev-parse --short HEAD` PORT=3093 react-scripts start",
+    "start:windows": "react-scripts start",
+    "build": "cross-env CI=true REACT_APP_GIT_SHA=`git rev-parse --short HEAD` react-scripts --max_old_space_size=4096 build",
+    "serve": "serve -s build -l 3093",
+    "test:coverage": "react-scripts test --env=jsdom --coverage --watchAll=false",
+    "test:unit": "react-scripts test --env=jsdom",
+    "test:unit:ci": "cross-env CI=true react-scripts test --env=jsdom",
+    "test:e2e": "cross-env NODE_PATH=src NODE_ENV=development cypress run",
+    "test:e2e:ci": "cross-env NODE_PATH=src NODE_ENV=development cypress run --config video=false",
+    "test:e2e:ci:start": "cross-env BROWSER=none start-server-and-test serve http-get://localhost:3093 test:e2e:ci",
+    "cypress:open": "cross-env NODE_PATH=src NODE_ENV=development cypress open",
+    "generate:license": "license-checker --summary > public/license/license_summary.txt && license-checker --relativeLicensePath --customPath .license-checker.json > public/license/license_full.txt",
+    "version:update": "npm version prerelease -m '[server] version upgrade to: %s'"
+  },
   "dependencies": {
+    "@material-ui/core": "^4.1.1",
+    "axios": "^0.19.0",
+    "cross-env": "^5.2.0",
+    "debounce": "^1.2.0",
+    "husky": "^2.4.1",
+    "i18next": "^17.0.3",
+    "i18next-xhr-backend": "^3.0.0",
+    "jest-styled-components": "^6.3.3",
+    "lint-staged": "^8.2.1",
+    "memoizee": "^0.4.14",
+    "moment": "^2.24.0",
+    "node-sass": "^4.12.0",
+    "prettier": "^1.18.2",
+    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1"
+    "react-helmet": "^5.2.1",
+    "react-i18next": "^10.11.0",
+    "react-icons": "^3.7.0",
+    "react-redux": "^7.1.0",
+    "react-router": "^5.0.1",
+    "react-router-dom": "^5.0.1",
+    "react-scripts": "3.0.1",
+    "react-test-renderer": "^16.8.6",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
+    "reselect": "^4.0.0",
+    "styled-components": "^4.3.1"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+  "devDependencies": {
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^5.0.0",
+    "license-checker": "^25.0.1",
+    "serve": "^11.0.2",
+    "start-server-and-test": "^1.9.1"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "airbnb",
+      "prettier"
+    ],
+    "plugins": [
+      "import"
+    ],
+    "root": true,
+    "rules": {
+      "no-continue": "off",
+      "react/prefer-stateless-function": "off",
+      "react/jsx-filename-extension": "off",
+      "react/jsx-one-expression-per-line": "off",
+      "react/forbid-prop-types": "off",
+      "import/prefer-default-export": "off",
+      "no-prototype-builtins": "off",
+      "no-restricted-imports": [
+        "error",
+        {
+          "paths": [
+            {
+              "name": "styled-components",
+              "message": "Use styled-components/macro instead."
+            }
+          ],
+          "patterns": [
+            "!styled-components/macro"
+          ]
+        }
+      ],
+      "import/order": "off",
+      "no-restricted-syntax": [
+        "error",
+        "ForInStatement",
+        "LabeledStatement",
+        "WithStatement"
+      ],
+      "lines-between-class-members": [
+        "error",
+        "always",
+        {
+          "exceptAfterSingleLine": true
+        }
+      ]
+    },
+    "settings": {
+      "import/resolver": {
+        "node": {
+          "moduleDirectory": [
+            "node_modules",
+            "src"
+          ]
+        }
+      }
+    }
   },
   "browserslist": {
     "production": [
@@ -27,5 +126,22 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "prettier": {
+    "endOfLine": "lf",
+    "printWidth": 100,
+    "singleQuote": true,
+    "trailingComma": "all"
   }
 }

@@ -1,0 +1,26 @@
+├─ MIT: 1236
+├─ ISC: 111
+├─ BSD-3-Clause: 35
+├─ BSD-2-Clause: 31
+├─ CC0-1.0: 25
+├─ Apache-2.0: 25
+├─ BSD*: 4
+├─ MIT*: 3
+├─ BSD: 2
+├─ CC-BY-3.0: 2
+├─ CC-BY-4.0: 1
+├─ BSD-3-Clause OR MIT: 1
+├─ (MIT OR CC0-1.0): 1
+├─ AFLv2.1,BSD: 1
+├─ Public Domain: 1
+├─ WTFPL: 1
+├─ MPL-2.0: 1
+├─ (BSD-3-Clause OR GPL-2.0): 1
+├─ (MIT AND Zlib): 1
+├─ (WTFPL OR MIT): 1
+├─ UNLICENSED: 1
+├─ (MIT AND BSD-3-Clause): 1
+├─ (MIT OR Apache-2.0): 1
+├─ Unlicense: 1
+└─ (Apache-2.0 OR MPL-1.1): 1
+

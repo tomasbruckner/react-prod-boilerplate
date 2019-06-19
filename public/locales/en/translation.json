@@ -1,0 +1,13 @@
+{
+  "Common": {
+    "loading": "Loading...",
+    "notFound": "Not found",
+    "notAllowed": "Not allowed"
+  },
+  "Admin": {
+    "content": "Admin content"
+  },
+  "Home": {
+    "content": "Home content"
+  }
+}
